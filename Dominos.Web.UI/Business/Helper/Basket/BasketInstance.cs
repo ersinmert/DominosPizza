@@ -19,13 +19,16 @@ namespace Dominos.Web.UI.Business.Helper.Basket
             switch (submit)
             {
                 case BasketSubmits.List:
-                    Provider = new BasketList();
+                    Provider = new BasketListProvider();
                     break;
                 case BasketSubmits.Delete:
+                    Provider = new BasketDeleteProvider();
                     break;
                 case BasketSubmits.Increase:
+                    Provider = new BasketIncreaseProvider();
                     break;
                 case BasketSubmits.Decrease:
+                    Provider = new BasketDescreaseProvider();
                     break;
             }
 

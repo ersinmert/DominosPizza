@@ -10,7 +10,7 @@ namespace Dominos.Web.UI.Models.Home
             ProductList = new List<ProductOutputDTO>();
         }
 
-        public int? AddedProductId { get; set; }
+        public int AddedProductId { get; set; }
         public List<ProductOutputDTO> ProductList { get; set; }
     }
 }
