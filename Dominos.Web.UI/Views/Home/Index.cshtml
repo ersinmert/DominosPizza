@@ -1,0 +1,49 @@
+﻿@using Dominos.Web.UI.Models.Home
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model HomeViewModel
+
+<form asp-controller="Home" asp-action="Index" method="post">
+    <div class="col-md-12 bg-red text-center home-header-image-height">
+        <img class="margin-top-54" src="~/images/Asset1.png" />
+    </div>
+    <div class="col-md-8 offset-2 border border-dominos">
+        <div class="row">
+            <h4>Pizzalar</h4>
+        </div>
+        <div class="row">
+            @foreach (var product in Model?.ProductList)
+            {
+                <div class="col-md-4 home-product-margin-bottom" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;height:380px;">
+                    <div class="border border-dominos rounded product-radius" style="height:380px;">
+                        <div class="col-md-12 m-0 p-0">
+                            <img class="border-top embed-responsive pizza-image-size" src="@product.ImagePath" style="border-top-left-radius:25px;border-top-right-radius:25px;" />
+                        </div>
+                        <div class="col-md-12 border border-0 product-radius" style="padding:10px 25px 0px 25px;background-color:white;">
+                            <div class="col-md-12 m-0 p-0">
+                                <h5>@product.ProductName</h5>
+                            </div>
+                            <div class="col-md-12 m-0 p-0">
+                                @product.Description
+                            </div>
+                            <div class="align-bottom">
+                                <div class="row">
+                                    <div class="col-md-6 text-left align-middle">
+                                        @product.Price TL
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        <button class="btn btn-success product-radius">Sepete Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>
