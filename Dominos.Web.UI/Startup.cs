@@ -23,18 +23,25 @@ namespace Dominos.Web.UI
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc();
-            services.AddSession();
-            services.Configure<DominosConfig>(Configuration.GetSection("Configs"));
             services.AddHttpContextAccessor();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            
+            services.Configure<DominosConfig>(Configuration.GetSection("Configs"));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
-            services.AddSingleton<SessionHelper>();
-            services.AddSingleton<CookieHelper>();
+            services.AddScoped<SessionHelper>();
+            services.AddScoped<CookieHelper>();
+
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

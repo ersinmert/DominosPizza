@@ -88,6 +88,15 @@ namespace Dominos.Data.Context
                             ProductTypeId = context.ProductTypes.AsNoTracking().FirstOrDefault(x=> x.Name == "Drink").Id,
                             IsActive = true,
                             ImagePath = "https://dpe-cdn.azureedge.net/api/medium/Product/Global/_300AYRAN/NULL/434x404/TR?v=b56705583d2694a668f14ec1de8f3d57-1563102720000"
+                        },
+                        new Product
+                        {
+                            ProductName = "Sucuksever",
+                            Description = "Sucuk, Mozarella Peyniri, Pizza Sos",
+                            Price = 49.99,
+                            ProductTypeId = context.ProductTypes.AsNoTracking().FirstOrDefault(x=> x.Name == "Pizza").Id,
+                            IsActive = true,
+                            ImagePath = "https://dpe-cdn.azureedge.net/api/medium/ProductOsg/Global/_SUCUKPI/NULL/434x404/TR?v=b56705583d2694a668f14ec1de8f3d57-1563194520000"
                         }
                     });
                     context.SaveChanges();

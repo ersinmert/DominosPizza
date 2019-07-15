@@ -6,4 +6,27 @@
 
 @model RegisterViewModel
 
-<form asp-controller="Login" asp-action="Register" method="post"></form>
+<form asp-controller="Login" asp-action="Register" method="post">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4 offset-4">
+            <span asp-validation-for="Validation" class="text-danger"></span>
+
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" type="text" class="form-control" placeholder="Email" style="margin-bottom:10px;" />
+
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Şifre" style="margin-bottom:10px;" />
+
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" type="text" class="form-control" placeholder="İsim" style="margin-bottom:10px;" />
+
+            <span asp-validation-for="Surname" class="text-danger"></span>
+            <input asp-for="Surname" type="text" class="form-control" placeholder="Soyisim" style="margin-bottom:10px;" />
+
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Telefon Numarası" style="margin-bottom:10px;" />
+
+            <button class="btn btn-success float-right" name="submit" type="submit" value="Register">Üye Ol</button>
+        </div>
+    </div>
+</form>

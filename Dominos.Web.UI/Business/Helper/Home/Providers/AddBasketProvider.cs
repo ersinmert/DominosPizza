@@ -12,7 +12,7 @@ namespace Dominos.Web.UI.Business.Helper.Home.Providers
             var url = $"{Config.DominosApiUrl}{Config.BasketServices.AddProductToBasket}";
             var result = HttpHelper.Post<ResponseEntity<bool>, EditProductToBasketInputDTO>(new EditProductToBasketInputDTO
             {
-                CustomerId = CustomerId,
+                CustomerId = CustomerId == default(int) ? default(int?) : CustomerId,
                 BasketKey = CustomerId == null || CustomerId == default(int) ? BasketKey : null,
                 ProductId = model.AddedProductId
             }, url)?.Result;

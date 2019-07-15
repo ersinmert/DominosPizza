@@ -17,25 +17,30 @@ namespace Dominos.Web.UI.Business.Helper.Register.Providers
                 return;
             }
 
-            var url = $"{Config.DominosApiUrl}{Config.CustomerServices.Register}";
-            var result = HttpHelper.Post<ResponseEntity<CustomerOutputDTO>, RegisterInputDTO>(new RegisterInputDTO
+            try
             {
-                Email = model.Email,
-                Password = model.Password,
-                Name = model.Name,
-                Surname = model.Surname
-            }, url)?.Result;
+                var url = $"{Config.DominosApiUrl}{Config.CustomerServices.Register}";
+                var result = HttpHelper.Post<ResponseEntity<CustomerOutputDTO>, RegisterInputDTO>(new RegisterInputDTO
+                {
+                    Email = model.Email,
+                    Password = model.Password,
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    PhoneNumber = model.PhoneNumber
+                }, url)?.Result;
 
-            if (result != null)
-            {
-                Session.Set(SessionKey.Customer, result);
-                Cookie.Remove();
-                Cookie.Set(CookieKey.CustomerId, result.CustomerId);
-                Controller.RedirectToAction("Index", "Home");
-                return;
+                if (result != null)
+                {
+                    Session.Set(SessionKey.Customer, result);
+                    Cookie.Set(CookieKey.CustomerId, result.CustomerId.ToString());
+                    return;
+                }
+                ModelState.AddModelError("Email", "Kullanıcı oluşturulamadı!");
             }
-
-            ModelState.AddModelError("Email", "Kullanıcı oluşturulamadı!");
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Email", "Kullanıcı oluşturulamadı!");
+            }
         }
     }
 }

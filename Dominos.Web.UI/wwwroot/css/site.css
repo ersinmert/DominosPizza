@@ -90,3 +90,70 @@ body {
 .product-height{
     height:380px;
 }
+
+.basket-radius{
+    border-radius:25px;
+}
+
+.pizza-image {
+    height: 190px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.home-product {
+    margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.product-button {
+    border-radius: 25px;
+    height: 30px;
+    width: 100px;
+    padding: 0px !important;
+}
+
+.product-price {
+    color: orange;
+    text-align: center;
+    font-size: 30px;
+}
+
+.product-detail {
+    padding: 30px 25px 30px 25px;
+}
+
+.product-name {
+    font-size: 21px;
+}
+
+.product-description {
+    font-size: 14px;
+    height: 60px;
+}
+
+.basket-button {
+    border-radius: 20px;
+    color: white !important;
+    padding: 4px 10px 4px 10px;
+    border-color: white;
+}
+
+.login-margin {
+    margin-bottom: 10px;
+}
+
+.border-dominos-home {
+    border-color: rgba(172,172,172, .5) !important;
+    height: 380px;
+    width: 300px;
+    border-radius: 25px !important;
+}

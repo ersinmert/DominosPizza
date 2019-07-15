@@ -9,7 +9,7 @@ namespace Dominos.Web.UI.Business.Helper.Basket.Providers
     {
         public void FillBasketList(BasketViewModel model)
         {
-            var url = CustomerId == null
+            var url = CustomerId == null || CustomerId == default(int)
                        ? $"{Config.DominosApiUrl}{Config.BasketServices.GetBasket}?basketKey={BasketKey}"
                        : $"{Config.DominosApiUrl}{Config.BasketServices.GetBasket}?customerId={CustomerId}";
             var basket = HttpHelper.Get<ResponseEntity<BasketOutputDTO>>(url)?.Result;

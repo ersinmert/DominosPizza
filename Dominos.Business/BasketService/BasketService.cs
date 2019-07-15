@@ -49,6 +49,7 @@ namespace Dominos.Business.BasketService
                 {
                     var customerOrders = await _orderService.GetCustomerOrderList(customerId.Value);
                     discountAmount = customerOrders?.Result?.Any() == true ? discountAmount : productsPrice * 5 / 100;
+                    discountAmount = Math.Round(discountAmount, 2);
                 }
                 var totalPrice = productsPrice - discountAmount;
                 response.Result = new BasketOutputDTO

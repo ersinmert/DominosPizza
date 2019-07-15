@@ -1,5 +1,4 @@
-﻿
-using Dominos.Common.Classes;
+﻿using Dominos.Common.Classes;
 using Dominos.Common.Configuration;
 using Dominos.Common.Constants;
 using Dominos.Common.DTO.Output;
@@ -31,6 +30,20 @@ namespace Dominos.Web.UI.Business
             get { return httpContext.Session.Id; }
         }
 
+        public string BasketKey
+        {
+            get
+            {
+                var cookieBasketKey = _cookie.Get(CookieKey.CustomerId);
+                if (cookieBasketKey == null)
+                {
+                    cookieBasketKey = SessionId;
+                    _cookie.Set(CookieKey.CustomerId, cookieBasketKey);
+                }
+                return cookieBasketKey;
+            }
+        }
+
         public CustomerOutputDTO Customer
         {
             get
@@ -40,19 +53,39 @@ namespace Dominos.Web.UI.Business
                 {
                     try
                     {
-                        var customerId = Convert.ToInt32(_cookie.Get<string>(CookieKey.CustomerId));
+                        var customerId = Convert.ToInt32(_cookie.Get(CookieKey.CustomerId));
                         if (customerId != default(int))
                         {
                             var url = $"{_config.DominosApiUrl}{_config.CustomerServices.CustomerById}?customerId={customerId}";
                             customer = HttpHelper.Get<ResponseEntity<CustomerOutputDTO>>(url)?.Result;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
                     }
                 }
                 return customer;
+            }
+        }
+
+        public int? CustomerId
+        {
+            get
+            {
+                var customerId = Customer?.CustomerId;
+                if (customerId == null)
+                {
+                    try
+                    {
+                        customerId = Convert.ToInt32(_cookie.Get(CookieKey.CustomerId));
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                return customerId;
             }
         }
 

@@ -15,5 +15,10 @@ namespace Dominos.Web.UI.Models.Login
 
         [Required(ErrorMessage = "Şifre girilmesi zorunludur.")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Telefon girilmesi zorunludur.")]
+        public string PhoneNumber { get; set; }
+
+        public string Validation { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Dominos.Common.Configuration;
+using Dominos.Common.Constants;
 using Dominos.Web.UI.Business;
 using Dominos.Web.UI.Business.Helper.Login;
 using Dominos.Web.UI.Business.Helper.Register;
@@ -37,7 +38,19 @@ namespace Dominos.Web.UI.Controllers
             var instance = new LoginInstance(this, ModelState, submit, _config, _session, _cookie);
             instance.Provider.Execute(model);
 
+            if (_session.Customer != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            _session.End();
+            _cookie.Remove(CookieKey.CustomerId);
+            return RedirectToAction("Index","Home");
         }
 
         public IActionResult Register()
@@ -55,6 +68,11 @@ namespace Dominos.Web.UI.Controllers
         {
             var instance = new RegisterInstance(this, ModelState, submit, _config, _session, _cookie);
             instance.Provider.Execute(model);
+
+            if (_session.Customer != null)
+            {
+                return RedirectToAction("Index","Home");
+            }
 
             return View(model);
         }
